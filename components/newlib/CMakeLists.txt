@@ -30,6 +30,7 @@ set(srcs
     "sysconf.c"
     "realpath.c"
     "scandir.c"
+    "unistd.c"
 )
 
 if(CONFIG_STDATOMIC_S32C1I_SPIRAM_WORKAROUND)
