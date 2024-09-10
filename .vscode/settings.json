@@ -1,0 +1,14 @@
+{
+  "idf.adapterTargetName": "esp32s2",
+  "idf.port": "/dev/ttyACM9",
+  "idf.flashType": "UART",
+  "files.associations": {
+    "tusb_console.h": "c",
+    "cstdlib": "c",
+    "freertos.h": "c",
+    "task.h": "c",
+    "esp_log.h": "c",
+    "*.old": "c",
+    "stdint.h": "c"
+  }
+}
