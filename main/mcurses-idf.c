@@ -16,8 +16,6 @@
 #include "cl_main.h"
 #include "esp_vfs.h"
 
-// #include <stdio.h>
-
 static const char *TAG = "example";
 
 
@@ -82,7 +80,6 @@ int myfs_open(const char * path, int flags, int mode){
 }
 int myfs_fstat(int fd, struct stat * st){ 
     ESP_LOGI("myfs", "fstat fd=%d", fd);
-
     return 0;
 }
 int myfs_close(int fd){
@@ -111,9 +108,12 @@ void app_main(void){
     
     struct stat sb;
     FILE* file = fopen("/tmp/test", "w");
-    int res = fstat(file, &sb);
-    ESP_LOGI(TAG, "fstat result: %d", res);
+    ESP_LOGI(TAG, "fprintf result: %d", (int)fprintf(file, "hello world"));
+    ESP_LOGI(TAG, "fstat result: %d", (int)fstat(file, &sb));
 
+    char buf[100]; 
+    ESP_LOGI(TAG, "fgets result: %d", (int)fgets(buf, 100, file));
+    ESP_LOGI(TAG, "fgets buffer: %s", buf);
 
 
     ESP_LOGI(TAG, "Waiting to start VI main()");
