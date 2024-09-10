@@ -9,6 +9,8 @@
     "task.h": "c",
     "esp_log.h": "c",
     "*.old": "c",
-    "stdint.h": "c"
+    "stdint.h": "c",
+    "esp_random.h": "c",
+    "chrono": "c"
   }
 }
