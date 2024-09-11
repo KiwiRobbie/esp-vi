@@ -181,7 +181,7 @@ void app_main(void)
     ESP_LOGI(TAG, "pread err: %s", strerror(errno));
 
     ESP_LOGI(TAG, "%ld %ld", sb.st_size, sb.st_blksize);
-    // esp_log_level_set("*", ESP_LOG_ERROR);
+    esp_log_level_set("*", ESP_LOG_ERROR);
     setFunction_putchar(esp_putchar); // tell the library which output channel shall be used
 
     // {
@@ -192,12 +192,12 @@ void app_main(void)
         .data_bits = UART_DATA_8_BITS,
         .parity = UART_PARITY_DISABLE,
         .stop_bits = UART_STOP_BITS_1,
-        .flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS,
-        .rx_flow_ctrl_thresh = 122,
+        .flow_ctrl = UART_HW_FLOWCTRL_DISABLE, // UART_HW_FLOWCTRL_CTS_RTS,
+        .rx_flow_ctrl_thresh = 1,
     };
     // Configure UART parameters
     ESP_ERROR_CHECK(uart_param_config(uart_num, &uart_config));
-    ESP_ERROR_CHECK(uart_set_pin(UART_NUM_0, 4, 5, 18, 19));
+    ESP_ERROR_CHECK(uart_set_pin(UART_NUM_0, 1, 2, 18, 19));
 
     // QueueHandle_t uart_queue ;
     ESP_ERROR_CHECK(
@@ -209,7 +209,16 @@ void app_main(void)
     //         ESP_LOGI(TAG, "Wrote to UART");
 
     uart_write_bytes(uart_num, (const char *)message, strlen(message));
+
+    // while (1)
+    // {
+    //     char buf[100];
+    //     int nr = uart_read_bytes(UART_NUM_0, &buf, 100, 0);
+    //     if (nr > 0)
+    //     {
+    //         uart_write_bytes(UART_NUM_0, &buf, nr);
     //     }
+    //     vTaskDelay(20 / portTICK_PERIOD_MS);
     // }
 
     ESP_LOGI(TAG, "Waiting to start VI main()");
