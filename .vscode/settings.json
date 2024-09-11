@@ -1,5 +1,5 @@
 {
-  "idf.adapterTargetName": "esp32s2",
+  "idf.adapterTargetName": "esp32",
   "idf.port": "/dev/ttyACM9",
   "idf.flashType": "UART",
   "files.associations": {
@@ -11,6 +11,13 @@
     "*.old": "c",
     "stdint.h": "c",
     "esp_random.h": "c",
-    "chrono": "c"
+    "chrono": "c",
+    "time.h": "c",
+    "common.h": "c",
+    "bsd_unistd.h": "c",
+    "compat.h": "c",
+    "cl_main.h": "c",
+    "bsd_db.h": "c",
+    "errno.h": "c"
   }
 }
