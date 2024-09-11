@@ -1,2 +1,2 @@
-idf_component_register(SRCS "mcurses-idf.c"
+idf_component_register(SRCS "esp-vi.c"
                     INCLUDE_DIRS ".")

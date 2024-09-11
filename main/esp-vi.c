@@ -7,18 +7,20 @@
 #include <stdint.h>
 #include <math.h>
 #include "esp_log.h"
+#include "esp_random.h"
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/queue.h"
+#include "driver/uart.h"
+
 #include "sdkconfig.h"
 #include "mcurses.h"
-#include "esp_random.h"
 
 #include "cl_main.h"
 #include "esp_attr.h"
 #include "esp_vfs.h"
-// #include "compat.h"
-// #include <"stat.h">
+
+#include <errno.h>
 
 static const char *TAG = "example";
 
@@ -132,7 +134,14 @@ static int myfs_close(int fd)
 
     return 0;
 }
-#include <errno.h>
+
+void esp_putchar(uint8_t c)
+{
+    uart_write_bytes(UART_NUM_0, &c, 1);
+    // fputc(c, stdout);
+    // tinyusb_cdcacm_write_queue_char(0, c);
+}
+
 void app_main(void)
 {
     esp_vfs_t myfs = {
@@ -172,6 +181,36 @@ void app_main(void)
     ESP_LOGI(TAG, "pread err: %s", strerror(errno));
 
     ESP_LOGI(TAG, "%ld %ld", sb.st_size, sb.st_blksize);
+    // esp_log_level_set("*", ESP_LOG_ERROR);
+    setFunction_putchar(esp_putchar); // tell the library which output channel shall be used
+
+    // {
+    const int uart_buffer_size = (1024 * 2);
+    const uart_port_t uart_num = UART_NUM_0;
+    uart_config_t uart_config = {
+        .baud_rate = 115200,
+        .data_bits = UART_DATA_8_BITS,
+        .parity = UART_PARITY_DISABLE,
+        .stop_bits = UART_STOP_BITS_1,
+        .flow_ctrl = UART_HW_FLOWCTRL_CTS_RTS,
+        .rx_flow_ctrl_thresh = 122,
+    };
+    // Configure UART parameters
+    ESP_ERROR_CHECK(uart_param_config(uart_num, &uart_config));
+    ESP_ERROR_CHECK(uart_set_pin(UART_NUM_0, 4, 5, 18, 19));
+
+    // QueueHandle_t uart_queue ;
+    ESP_ERROR_CHECK(
+        uart_driver_install(UART_NUM_0, uart_buffer_size,
+                            uart_buffer_size, 10, NULL, 0));
+    //     while (1)
+    //     {
+    char *message = "Hello World\n";
+    //         ESP_LOGI(TAG, "Wrote to UART");
+
+    uart_write_bytes(uart_num, (const char *)message, strlen(message));
+    //     }
+    // }
 
     ESP_LOGI(TAG, "Waiting to start VI main()");
 
