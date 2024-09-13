@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2021-2024 Jeffrey H. Johnson <trnsz@pobox.com>
+*.txt       linguist-documentation
+*.ms        linguist-documentation
+*.1         linguist-documentation
+*.8         linguist-documentation
+*.md        linguist-documentation
+*.rm        linguist-documentation
+*.advanced  linguist-documentation
+*.beginner  linguist-documentation
+*.summary   linguist-documentation
+*.vindex    linguist-documentation
+*.chars     linguist-documentation
+*.refs      linguist-documentation
+*.roff      linguist-documentation
+./docs/*    linguist-documentation
+*.in        linguist-vendored
+*.csh       linguist-vendored
+*.script    linguist-vendored

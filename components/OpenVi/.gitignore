@@ -1,0 +1,119 @@
+# SPDX-License-Identifier: BSD-3-Clause
+# Copyright (c) 2021-2024 Jeffrey H. Johnson <trnsz@pobox.com>
+
+# Prerequisites
+*.d
+
+# Timing
+*.t
+
+# Object files
+*.o
+*.ko
+*.obj
+*.elf
+*.dll
+*.exe
+
+# Linker output
+*.ilk
+*.map
+*.exp
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+*.a
+*.la
+*.lo
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+*.so.*
+*.dylib
+
+# Executables
+*.exe
+*.out
+*.app
+*.i*86
+*.x86_64
+*.hex
+
+# Debug files
+*.dSYM/
+*.su
+*.idb
+*.pdb
+
+# Kernel Module Compile Results
+*.mod*
+*.cmd
+.tmp_versions/
+modules.order
+Module.symvers
+Mkfile.old
+dkms.conf
+
+# Output
+common/options_def.h
+ex/ex_def.h
+bin/*
+
+# Patch
+*.rej
+*.orig
+*.diff
+
+# Junk
+typescript
+.DS_Store
+.cproject
+.project
+.settings/
+.vscode/
+.nvimlog
+.vimlog
+*.*.swp
+test.txt
+
+# Tags
+tags
+.tags
+ctags
+.ctags
+etags
+.etags
+.TAGS
+TAGS
+GRTAGS
+GTAGS
+GPATH
+
+# Cores
+core
+*.core
+
+# Local
+.autoenv
+.envrc
+
+# Bad Targets
+all
+clean
+install
+distclean
+
+# Profiling
+*.gcda
+*.gcov
+*.gcno
+*.profdata
+*.profout
+
+# Tidy
+compile_commands.json
